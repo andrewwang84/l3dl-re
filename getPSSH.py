@@ -32,16 +32,17 @@ def get_pssh(mpd_url):
                         try:
                             for t in period['AdaptationSet']['ContentProtection']:
                                 if t['@schemeIdUri'].lower() == "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed":
-                                    pssh = t["cenc:pssh"]
+                                    pssh = t["cenc:pssh"]['#text']
                         except Exception:
                             pass
         else:
             for ad_set in periods['AdaptationSet']:
+                print(ad_set)
                 if ad_set['@mimeType'] == 'video/mp4':
                     try:
                         for t in ad_set['ContentProtection']:
                             if t['@schemeIdUri'].lower() == "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed":
-                                pssh = t["cenc:pssh"]
+                                pssh = t["cenc:pssh"]['#text']
                     except Exception:
                         pass
     except Exception:
