@@ -7,7 +7,10 @@ device_android_generic = {
     'session_id_type': 'android',
     'private_key_available': True,
     'vmp': False,
-    'send_key_control_nonce': True
+    'send_key_control_nonce': True,
+    'device_client_id_blob_filename': 'client_id.bin',
+    'device_vmp_blob_filename': 'google_sdk_gphone64_arm64_17.0.0_6e3e493b_28924_l3.wvd',
+    'device_private_key_filename': 'private_key.pem'
 }
 
 devices_available = [device_android_generic]

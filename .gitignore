@@ -1,0 +1,5 @@
+*.bin
+*.wvd
+*.pem
+output/
+.DS_Store
