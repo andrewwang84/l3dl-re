@@ -63,12 +63,14 @@ def fetch_key(pssh):
 
 def download(keys):
     if mpd_url != None:
-        if select_ and not os.path.exists(f'{cd}\\output\\{name}.mkv'):
-            os.system(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv --del-after-done --save-name "{name}" --save-dir "{cd}\\output" --use-shaka-packager -mt TRUE --thread-count 12')
-        elif not select_ and not os.path.exists(f'{cd}\\output\\{name}.mkv'):
+        base_dir = os.path.join(cd, 'output')
+        file_path = os.path.join(base_dir, f'{name}.mkv')
+        if select_ and not os.path.exists(file_path):
+            os.system(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 5M --del-after-done false --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
+        elif not select_ and not os.path.exists(file_path):
             print(
                 f'Processing {name} | Download, decrypt, and muxing may take some time.')
-            subprocess.call(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv --del-after-done -ss all -sa best -sv best --save-name "{name}" --save-dir "{cd}\\output" --use-shaka-packager -mt TRUE --thread-count 12')
+            subprocess.call(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 5M --del-after-done false -ss all -sa best -sv best --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
         else:
             print(f'{name} already on output folder. Skipped.')
     else:
@@ -169,5 +171,3 @@ else:
 
 if shutdown:
     os.system(f'shutdown /f /s')
-
-# TODO: support for multi-keys usecase
