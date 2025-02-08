@@ -2,3 +2,10 @@ python3 l3dl_mac.py \
 -m "https://vod.beyondlive.com/tvod/8ab7c78a-dc3e-41d6-94d3-7b54798a1d78/0/manifest.mpd" \
 -l "https://blc.drmkeyserver.com/widevine_license" \
 -o "Beyond_test"
+
+mkvmerge -o output.mkv Beyond.mp4 Beyond.eng.m4a \
+--language 0:zh --track-name 0:"繁體中文" Beyond.zh-TW.vtt \
+--language 0:zh --track-name 0:"簡體中文" Beyond.zh-CN.vtt \
+--language 0:jpn --track-name 0:"日文" Beyond.ja.vtt \
+--language 0:kor --track-name 0:"韓文" Beyond.ko.vtt \
+--language 0:eng --track-name 0:"英文" Beyond.en.vtt

@@ -66,11 +66,11 @@ def download(keys):
         base_dir = os.path.join(cd, 'output')
         file_path = os.path.join(base_dir, f'{name}.mkv')
         if select_ and not os.path.exists(file_path):
-            os.system(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 5M --del-after-done false --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
+            os.system(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 30M --del-after-done false --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
         elif not select_ and not os.path.exists(file_path):
             print(
                 f'Processing {name} | Download, decrypt, and muxing may take some time.')
-            subprocess.call(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 5M --del-after-done false -ss all -sa best -sv best --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
+            subprocess.call(f'N_m3u8DL-RE.exe "{mpd_url}" --log-level ERROR --binary-merge --live-real-time-merge --mp4-real-time-decryption --key {keys} -M format=mkv:muxer=mkvmerge -R 30M --del-after-done false -ss all -sa best -sv best --save-name "{name}" --save-dir "{base_dir}" --use-shaka-packager -mt TRUE --thread-count 10', shell=True)
         else:
             print(f'{name} already on output folder. Skipped.')
     else:
